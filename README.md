@@ -55,6 +55,11 @@ Full stack con criterio de datos, seguridad y operación real, y con una mirada 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg"/><source media="(prefers-color-scheme: light)" srcset="assets/stack-light.svg"/><img src="assets/stack-light.svg" width="100%" alt="Stack: Next.js, React, TypeScript, Supabase, PostgreSQL, Mercado Pago Checkout Pro, Playwright, Docker y más; el detalle está en el texto plano de abajo"/></picture>
 
 <!--STATS:START-->
+## Actividad
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/activity-dark.svg"/><source media="(prefers-color-scheme: light)" srcset="assets/activity-light.svg"/><img src="assets/activity-light.svg" width="100%" alt="Actividad en GitHub: contribuciones del último año, rachas y lenguajes"/></picture>
+
+<sub>Datos reales de GitHub, actualizados una vez por día por un workflow de este repo.</sub>
 <!--STATS:END-->
 
 ## Formación
