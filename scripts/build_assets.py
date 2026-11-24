@@ -7,12 +7,15 @@ Sin dependencias: solo la librería estándar.
 """
 from __future__ import annotations
 
+import base64
 import math
 import random
 from html import escape
 from pathlib import Path
 
 OUT = Path(__file__).resolve().parent.parent / "assets"
+PORTRAIT = OUT / "portrait.jpg"  # recorte 4:5 de la foto del portfolio
+DISPLAY_FONT = Path("/usr/share/fonts/opentype/inter/InterDisplay-ExtraBold.otf")  # opcional: si no está, el nombre sale como texto
 
 SANS = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif"
 MONO = "ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace"
@@ -27,53 +30,51 @@ THEMES = {
 # ----------------------------------------------------------------------------- contenido
 
 PROJECTS = [
-    dict(id="miboliche", name="miBoliche", status="prod", label="EN PRODUCCIÓN · BOSKO", motif="eq",
-         desc=["POS y pedidos por QR para boliches: carta digital,",
-               "barra con cola de despacho en vivo, caja y cobros.",
-               "~1.000 pedidos por noche en eventos pico."],
+    dict(id="miboliche", name="miBoliche", status="prod", label="Bosko Nightclub · desde julio de 2026", motif="eq",
+         desc=["POS y pedidos por QR para boliches: carta digital, barra en vivo, caja",
+               "y cobros. Cerca de 1.000 pedidos por noche en eventos pico."],
          chips=["Next.js", "SSE", "Postgres", "Mercado Pago"]),
-    dict(id="arbos", name="ARBOS", status="prod", label="EN PRODUCCIÓN · ARBOS.AR", motif="spray",
-         desc=["E-commerce de perfumes: catálogo, combos y bolsa,",
-               "más un dashboard privado para stock, insumos,",
-               "pedidos, ventas y gastos."],
+    dict(id="arbos", name="ARBOS", status="prod", label="arbos.ar · tienda online", motif="spray",
+         desc=["E-commerce de perfumes con catálogo, combos y bolsa, más un dashboard",
+               "privado para stock, insumos, pedidos, ventas y gastos."],
          chips=["Next.js 16", "Supabase", "GSAP", "Playwright"]),
-    dict(id="pedilo", name="Pedilo", status="dev", label="EN DESARROLLO", motif="route",
+    dict(id="pedilo", name="Pedilo", status="dev", label="Delivery", motif="route",
          desc=["Delivery local para Bolívar: app del consumidor,",
                "panel del negocio con comandera en tiempo real",
                "y bot de pedidos por WhatsApp con IA."],
          chips=["Next.js 16", "Supabase", "Turborepo", "Docker"]),
-    dict(id="ticketera", name="Ticketera QR", status="dev", label="EN DESARROLLO", motif="qr",
+    dict(id="ticketera", name="Ticketera QR", status="dev", label="Ticketing", motif="qr",
          desc=["Entradas para eventos: reserva atómica de stock,",
                "webhook de pagos idempotente, QR firmado con",
                "HMAC y check-in atómico en portería."],
          chips=["Next.js", "Supabase", "Mercado Pago", "Zod"]),
-    dict(id="market", name="Pedilo Market", status="demo", label="DEMO", motif="bids",
+    dict(id="market", name="Pedilo Market", status="demo", label="Marketplace · demo", motif="bids",
          desc=["Marketplace por localidades con pujas en vivo.",
                "Demo web; el objetivo es una app nativa",
                "para Android y iOS."],
          chips=["Next.js 16", "React 19", "Tailwind v4"]),
-    dict(id="inmo", name="Bolívar Inmo", status="dev", label="EN DESARROLLO", motif="pin",
+    dict(id="inmo", name="Bolívar Inmo", status="dev", label="Portal inmobiliario", motif="pin",
          desc=["Portal inmobiliario de la ciudad: las propiedades",
                "de todas las inmobiliarias en un solo lugar,",
                "con mapa. Mobile primero."],
          chips=["Next.js 16", "MapLibre", "Base UI", "Supabase"]),
-    dict(id="ventapro", name="VentaPro", status="dev", label="EN DESARROLLO", motif="barcode",
+    dict(id="ventapro", name="VentaPro", status="dev", label="Punto de venta", motif="barcode",
          desc=["POS y gestión para kioscos y supermercados:",
                "corre local en la PC del comercio, con escaneo",
                "por cámara y consulta desde el celular."],
          chips=["React", "Vite", "TypeScript", "Supabase"]),
-    dict(id="mora", name="Mora", status="demo", label="DEMO", motif="chart",
+    dict(id="mora", name="Mora", status="demo", label="Gobierno · demo", motif="chart",
          desc=["SaaS de gestión de mora y cobranza municipal:",
                "panel de administración y portal del vecino,",
                "con datos sintéticos."],
          chips=["Next.js", "TypeScript", "SDD"]),
-    dict(id="auditoria", name="Auditoría Actual Online", status="case", label="RESPONSIBLE DISCLOSURE",
+    dict(id="auditoria", name="Auditoría Actual Online", status="case", label="Responsible disclosure",
          motif="shield",
          desc=["Hallazgo en la superficie pública, contacto con la",
                "empresa y auditoría autorizada: 22 hallazgos,",
                "re-auditoría y plan de remediación."],
          chips=["API security", "OWASP", "Auth"]),
-    dict(id="bridge-panel", name="Bridge Panel", status="tool", label="HERRAMIENTA INTERNA", motif="calendar",
+    dict(id="bridge-panel", name="Bridge Panel", status="tool", label="Herramienta interna", motif="calendar",
          desc=["Calendario interno del equipo: reuniones,",
                "deadlines y timeline por proyecto. PWA pensada",
                "para usarse con una mano desde el celular."],
@@ -88,16 +89,17 @@ CONTACTS = [
 ]
 
 STACK = [
-    ("FRONTEND", ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vite", "Flutter", "PWA"]),
+    ("FRONTEND", ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "GSAP", "Vite", "Flutter", "PWA"]),
     ("BACKEND Y DATOS", ["Node.js", "Supabase", "PostgreSQL", "SQL", "Row Level Security", "Java · Spring", "Zod"]),
     ("PAGOS E INTEGRACIONES", ["Mercado Pago Checkout Pro", "Webhooks", "SSE", "Realtime", "WhatsApp Cloud API"]),
     ("TESTING E INFRA", ["Playwright", "Vitest", "GitHub Actions", "Docker", "Vercel", "Caddy", "Linux", "Turborepo"]),
     ("SEGURIDAD Y REDES", ["Auditoría de APIs", "OWASP Top 10", "Auth / RBAC", "TCP/IP · DNS", "Redes Wi-Fi"]),
-    ("DISEÑO", ["Photoshop", "Illustrator", "Identidad visual", "UI para operación"]),
+    ("DISEÑO", ["Figma", "Penpot", "Photoshop", "Illustrator", "Identidad visual", "UI / UX", "Motion"]),
 ]
 
 STEPS = ["Brief", "Spec", "Código", "Tests", "Producción", "Soporte"]
-ROLES = ["Full Stack", "Data", "Pagos", "Seguridad", "Operación real"]
+ROLES = ["Full Stack", "Frontend", "Diseño", "Data", "Pagos", "Seguridad"]
+FEATURED = {"miboliche", "arbos"}
 
 # ----------------------------------------------------------------------------- helpers
 
@@ -116,7 +118,7 @@ KEYFRAMES = """
 @keyframes rise{0%,15%{transform:scaleY(0)}45%,85%{transform:scaleY(1)}100%{transform:scaleY(0)}}
 @keyframes cell{0%,100%{opacity:.18}50%{opacity:1}}
 @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-6px,5px)}}
-@keyframes word{0%,3%{opacity:0;transform:translateY(8px)}6%,17%{opacity:1;transform:none}20%,100%{opacity:0;transform:translateY(-8px)}}
+@keyframes word{0%{opacity:0;transform:translateY(10px)}2.5%,14%{opacity:1;transform:none}16.6%,100%{opacity:0;transform:translateY(-10px)}}
 @keyframes sheen{0%{transform:translateX(-140px)}60%,100%{transform:translateX(900px)}}
 .ping{transform-box:fill-box;transform-origin:center;animation:ping 2.4s ease-out infinite}
 .float{animation:float 4s ease-in-out infinite}
@@ -132,7 +134,7 @@ KEYFRAMES = """
 .rise{transform-box:fill-box;transform-origin:bottom;animation:rise 4s ease-in-out infinite}
 .cell{animation:cell 3s ease-in-out infinite}
 .drift{animation:drift 14s ease-in-out infinite}
-.word{opacity:0;animation:word 15s ease-in-out infinite}
+.word{opacity:0;animation:word 18s cubic-bezier(.16,1,.3,1) infinite}
 .sheen{animation:sheen 7s ease-in-out infinite}
 @keyframes wave{0%,100%{opacity:1}50%{opacity:.45}}
 @keyframes grow{0%{transform:scaleX(0)}25%,100%{transform:scaleX(1)}}
@@ -153,15 +155,36 @@ def mono_w(text: str, size: float) -> float:
     return len(text) * size * 0.6
 
 
+def cham(x: float, y: float, w: float, h: float, c: float) -> str:
+    """Rectángulo con dos esquinas en chaflán (arriba-izquierda y abajo-derecha), como el retrato del portfolio."""
+    return f"M{x + c} {y}H{x + w}V{y + h - c}L{x + w - c} {y + h}H{x}V{y + c}Z"
+
+
 def chip(x: float, y: float, text: str, t: dict, size: float = 10.5) -> tuple[str, float]:
-    w = mono_w(text, size) + 18
-    s = (f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="22" rx="11" fill="{t["faint"]}" stroke="{t["line"]}"/>'
-         f'<text class="m" x="{x + 9:.1f}" y="{y + 15}" font-size="{size}" fill="{t["muted"]}">{escape(text)}</text>')
+    w = mono_w(text, size) + 16
+    s = (f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="22" rx="2" fill="{t["faint"]}" stroke="{t["line"]}"/>'
+         f'<text class="m" x="{x + 8:.1f}" y="{y + 15}" font-size="{size}" fill="{t["muted"]}">{escape(text)}</text>')
     return s, w
 
 
-def status_color(status: str, t: dict) -> str:
-    return {"prod": t["ok"], "dev": t["warn"], "demo": t["accent"], "case": t["accent"], "tool": t["muted"]}[status]
+def text_path(text: str, size: float, x: float, y: float, fill: str, tracking: float = -0.02) -> str | None:
+    """Convierte texto a contornos con la tipografía display, para que se vea igual en cualquier sistema."""
+    try:
+        from fontTools.pens.svgPathPen import SVGPathPen
+        from fontTools.pens.transformPen import TransformPen
+        from fontTools.ttLib import TTFont
+        font = TTFont(DISPLAY_FONT)
+    except Exception:
+        return None
+    gs, cmap, upm = font.getGlyphSet(), font.getBestCmap(), font["head"].unitsPerEm
+    k, cx, out = size / upm, x, ""
+    for ch in text:
+        g = gs[cmap[ord(ch)]]
+        pen = SVGPathPen(gs)
+        g.draw(TransformPen(pen, (k, 0, 0, -k, cx, y)))
+        out += pen.getCommands()
+        cx += g.width * k + tracking * size
+    return f'<path d="{out}" fill="{fill}"/>'
 
 
 # ----------------------------------------------------------------------------- motifs (caja 96x56)
@@ -240,122 +263,140 @@ def motif(kind: str, t: dict) -> str:
 # ----------------------------------------------------------------------------- piezas
 
 def project_card(p: dict, t: dict) -> str:
-    W, H = 412, 196
-    c = status_color(p["status"], t)
-    lw = mono_w(p["label"], 10) + len(p["label"]) * 0.4 + 40
-    body = f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="14" fill="{t["bg"]}" stroke="{t["line"]}"/>'
-    body += (f'<rect x="20" y="18" width="{lw:.1f}" height="22" rx="11" fill="{t["panel"]}" stroke="{t["line"]}"/>'
-             f'<circle class="ping" cx="33" cy="29" r="3.5" fill="{c}"/><circle cx="33" cy="29" r="3.5" fill="{c}"/>'
-             f'<text class="m" x="44" y="33" font-size="10" letter-spacing=".4" fill="{t["muted"]}">{escape(p["label"])}</text>')
-    body += f'<g transform="translate(296,14)">{motif(p["motif"], t)}</g>'
-    body += f'<text x="20" y="80" font-size="21" font-weight="700" fill="{t["ink"]}">{escape(p["name"])}</text>'
+    big = p["id"] in FEATURED
+    W, H = (840, 204) if big else (412, 196)
+    body = f'<path d="{cham(.5, .5, W - 1, H - 1, 16)}" fill="{t["bg"]}" stroke="{t["line"]}"/>'
+    body += (f'<text x="{28 if big else 22}" y="{42 if big else 36}" font-size="10.5" font-weight="600" '
+             f'letter-spacing="1.3" fill="{t["accent"]}">{escape(p["label"].upper())}</text>')
+    if big:
+        body += f'<g transform="translate(606,42) scale(2.05)">{motif(p["motif"], t)}</g>'
+        body += f'<text x="28" y="88" font-size="32" font-weight="800" letter-spacing="-.6" fill="{t["ink"]}">{escape(p["name"])}</text>'
+        x0, y0, fs, lh, cy = 28, 114, 14, 20, 162
+    else:
+        body += f'<g transform="translate(296,14)">{motif(p["motif"], t)}</g>'
+        body += f'<text x="22" y="80" font-size="21" font-weight="700" letter-spacing="-.2" fill="{t["ink"]}">{escape(p["name"])}</text>'
+        x0, y0, fs, lh, cy = 22, 103, 12.5, 18, 156
     for i, line in enumerate(p["desc"]):
-        body += f'<text x="20" y="{103 + i * 18}" font-size="12.5" fill="{t["muted"]}">{escape(line)}</text>'
-    x = 20.0
+        body += f'<text x="{x0}" y="{y0 + i * lh}" font-size="{fs}" fill="{t["muted"]}">{escape(line)}</text>'
+    x = float(x0)
     for ch in p["chips"]:
-        s, w = chip(x, 156, ch, t, 10)
+        s, w = chip(x, cy, ch, t, 10)
         body += s
         x += w + 6
     assert x < W - 14, (p["id"], x)
-    label = f'{p["name"]}: {" ".join(p["desc"])} Stack: {", ".join(p["chips"])}.'
+    label = f'{p["name"]} ({p["label"]}): {" ".join(p["desc"])} Stack: {", ".join(p["chips"])}.'
     return svg(W, H, label, body)
 
 
 def contact_button(cdata: dict, t: dict) -> str:
     W, H = 412, 66
-    body = (f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="12" fill="{t["panel"]}" stroke="{t["line"]}"/>'
-            f'<rect x="0" y="16" width="3" height="34" rx="1.5" fill="{t["accent"]}"/>'
-            f'<text class="m" x="22" y="27" font-size="10" letter-spacing="1.2" fill="{t["muted"]}">{cdata["label"]}</text>'
+    body = (f'<path d="{cham(.5, .5, W - 1, H - 1, 12)}" fill="{t["panel"]}" stroke="{t["line"]}"/>'
+            f'<text x="22" y="27" font-size="10" font-weight="600" letter-spacing="1.3" fill="{t["muted"]}">{cdata["label"]}</text>'
             f'<text x="22" y="48" font-size="15" font-weight="600" fill="{t["ink"]}">{escape(cdata["value"])}</text>'
-            f'<g class="nudge"><path d="M{W - 40} 40 L{W - 26} 26 M{W - 36} 26 H{W - 26} V36" fill="none" stroke="{t["accent"]}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>')
+            f'<g class="nudge"><path d="M{W - 44} 40 L{W - 30} 26 M{W - 40} 26 H{W - 30} V36" fill="none" stroke="{t["accent"]}" stroke-width="2" stroke-linecap="square"/></g>')
     return svg(W, H, f'{cdata["label"].title()}: {cdata["value"]}', body)
 
 
 def hero(t: dict) -> str:
-    W, H = 840, 300
-    rnd = random.Random(7)
-    body = f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="18" fill="{t["bg"]}" stroke="{t["line"]}"/>'
-    # constelación
+    W, H = 840, 330
+    rnd = random.Random(11)
+    px, py, pw, ph = 590, 35, 208, 260  # retrato 4:5
+    body = (f'<defs><clipPath id="hc"><path d="{cham(1, 1, W - 2, H - 2, 22)}"/></clipPath>'
+            f'<clipPath id="pc"><path d="{cham(px, py, pw, ph, 24)}"/></clipPath>'
+            f'<clipPath id="wipe"><rect x="{px}" y="{py}" width="0" height="{ph}">'
+            f'<animate attributeName="width" dur="11s" repeatCount="indefinite" calcMode="spline" '
+            f'values="0;0;{pw};{pw};0;0" keyTimes="0;.3;.44;.72;.86;1" '
+            f'keySplines="0 0 1 1;.16 1 .3 1;0 0 1 1;.16 1 .3 1;0 0 1 1"/></rect></clipPath>'
+            f'<filter id="bw"><feColorMatrix type="saturate" values="0"/>'
+            f'<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-.05"/><feFuncG type="linear" slope="1.1" intercept="-.05"/>'
+            f'<feFuncB type="linear" slope="1.1" intercept="-.05"/></feComponentTransfer></filter></defs>')
+    body += f'<path d="{cham(.5, .5, W - 1, H - 1, 22)}" fill="{t["bg"]}" stroke="{t["line"]}"/>'
+    # constelación, por detrás del retrato
     pts = []
-    while len(pts) < 22:
-        x, y = rnd.uniform(470, 810), rnd.uniform(30, 270)
-        if all(math.hypot(x - px, y - py) > 42 for px, py in pts):
+    while len(pts) < 20:
+        x, y = rnd.uniform(430, 824), rnd.uniform(22, 308)
+        inside = px - 6 < x < px + pw + 6 and py - 6 < y < py + ph + 6
+        if not inside and all(math.hypot(x - qx, y - qy) > 40 for qx, qy in pts):
             pts.append((x, y))
-    lines = ""
+    lines = stars = ""
     for i, (x, y) in enumerate(pts):
-        near = sorted((math.hypot(x - px, y - py), j) for j, (px, py) in enumerate(pts) if j != i)[:2]
+        near = sorted((math.hypot(x - qx, y - qy), j) for j, (qx, qy) in enumerate(pts) if j != i)[:2]
         for d, j in near:
-            if j > i and d < 120:
-                px, py = pts[j]
-                lines += f'<path d="M{x:.0f} {y:.0f}L{px:.0f} {py:.0f}" stroke="{t["line"]}" stroke-width="1.2"/>'
-    stars = ""
-    for i, (x, y) in enumerate(pts):
-        big = i % 5 == 0
-        col = t["accent"] if big else t["muted"]
-        if big:
-            stars += f'<circle class="ping" style="animation-delay:{-i * 0.5:.1f}s" cx="{x:.0f}" cy="{y:.0f}" r="3.5" fill="{col}"/>'
-        stars += f'<circle class="tw" style="animation-delay:{-i * 0.41:.2f}s" cx="{x:.0f}" cy="{y:.0f}" r="{3.6 if big else 2.2}" fill="{col}"/>'
-    body += f'<g class="drift">{lines}{stars}</g>'
+            if j > i and d < 170:
+                qx, qy = pts[j]
+                lines += f'<path d="M{x:.0f} {y:.0f}L{qx:.0f} {qy:.0f}" stroke="{t["line"]}" stroke-width="1.2"/>'
+        big = i % 4 == 0
+        stars += (f'<circle class="tw" style="animation-delay:{-i * 0.41:.2f}s" cx="{x:.0f}" cy="{y:.0f}" '
+                  f'r="{3.4 if big else 2.1}" fill="{t["accent"] if big else t["muted"]}"/>')
+    body += f'<g clip-path="url(#hc)"><g class="drift">{lines}{stars}</g></g>'
+    # retrato: gris como en el sitio, con un barrido que revela el color
+    if PORTRAIT.exists():
+        b64 = base64.b64encode(PORTRAIT.read_bytes()).decode()
+        img = f'x="{px}" y="{py}" width="{pw}" height="{ph}" preserveAspectRatio="xMidYMid slice"'
+        body += (f'<g clip-path="url(#pc)"><image id="ph" {img} href="data:image/jpeg;base64,{b64}" filter="url(#bw)"/>'
+                 f'<g clip-path="url(#wipe)"><image {img} href="data:image/jpeg;base64,{b64}"/></g></g>')
+    body += f'<path d="{cham(px, py, pw, ph, 24)}" fill="none" stroke="{t["line"]}"/>'
+    # marcas de corte de imprenta en las esquinas del retrato
+    marks = ""
+    for i, (cx, cy, sx, sy) in enumerate([(px + pw, py, 1, -1), (px, py + ph, -1, 1)]):
+        marks += (f'<path class="tw" style="animation-delay:{-i * 1.8:.1f}s" d="M{cx + sx * 8} {cy}h{sx * 14}M{cx} {cy + sy * 8}v{sy * 14}" '
+                  f'stroke="{t["accent"]}" stroke-width="1.4"/>')
+    body += marks
     # texto
-    body += f'<text class="m" x="44" y="64" font-size="11" letter-spacing="2.2" fill="{t["muted"]}">BOLÍVAR · BUENOS AIRES · ARGENTINA</text>'
-    body += f'<text x="42" y="124" font-size="52" font-weight="800" letter-spacing="-1.5" fill="{t["ink"]}">Matías Asin</text>'
-    body += f'<text class="m" x="44" y="160" font-size="15" fill="{t["soft"]}">Software Engineer /</text>'
+    name = text_path("Matías Asin", 60, 40, 108, t["ink"])
+    body += name or f'<text x="42" y="108" font-size="58" font-weight="800" letter-spacing="-1.6" fill="{t["ink"]}">Matías Asin</text>'
+    body += f'<text x="44" y="148" font-size="18" fill="{t["muted"]}">Software Engineer</text>'
     n = len(ROLES)
     for i, r in enumerate(ROLES):
-        body += (f'<text class="m word w{i}" style="animation-delay:{i * 15 / n:.1f}s" x="232" y="160" '
-                 f'font-size="15" font-weight="700" fill="{t["accent"]}">{escape(r)}</text>')
-    body += f'<text x="44" y="204" font-size="17" fill="{t["ink"]}">Sistemas claros para problemas que no lo son.</text>'
-    body += f'<text x="44" y="228" font-size="13.5" fill="{t["muted"]}">Del problema de negocio al sistema corriendo en el piso.</text>'
-    pill = "DISPONIBLE · FULL-TIME"
-    pw = mono_w(pill, 10.5) + len(pill) * 0.6 + 46
-    body += (f'<rect x="44" y="246" width="{pw:.0f}" height="26" rx="13" fill="{t["panel"]}" stroke="{t["line"]}"/>'
-             f'<circle class="ping" cx="60" cy="259" r="4" fill="{t["ok"]}"/><circle cx="60" cy="259" r="4" fill="{t["ok"]}"/>'
-             f'<text class="m" x="73" y="263" font-size="10.5" letter-spacing=".6" fill="{t["ink"]}">{pill}</text>')
-    return svg(W, H, "Matías Asin, Software Engineer full stack de Bolívar, Buenos Aires, Argentina. "
-                     "Sistemas claros para problemas que no lo son. Disponible para un rol full-time.", body)
+        body += (f'<text class="word w{i}" style="animation-delay:{i * 18 / n:.1f}s" x="44" y="184" '
+                 f'font-size="25" font-weight="700" letter-spacing="-.3" fill="{t["accent"]}">{escape(r)}</text>')
+    body += f'<text x="44" y="238" font-size="17" fill="{t["ink"]}">Sistemas claros para problemas que no lo son.</text>'
+    body += f'<text x="44" y="262" font-size="13.5" fill="{t["muted"]}">Producto de punta a punta, con frontend y diseño cuidados al detalle.</text>'
+    body += f'<text x="44" y="296" font-size="11" font-weight="600" letter-spacing="1.3" fill="{t["muted"]}">BOLÍVAR, BUENOS AIRES · ARGENTINA</text>'
+    return svg(W, H, "Matías Asin, Software Engineer: full stack, frontend y diseño. Bolívar, Buenos Aires, Argentina. "
+                     "Sistemas claros para problemas que no lo son.", body)
 
 
 def process(t: dict) -> str:
     W, H = 840, 112
-    body = f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="14" fill="{t["bg"]}" stroke="{t["line"]}"/>'
+    body = f'<path d="{cham(.5, .5, W - 1, H - 1, 16)}" fill="{t["bg"]}" stroke="{t["line"]}"/>'
     xs = [70 + i * 140 for i in range(len(STEPS))]
     y = 46
     body += f'<path class="flow" d="M{xs[0]} {y}H{xs[-1]}" stroke="{t["muted"]}" stroke-width="1.6" fill="none"/>'
-    body += (f'<circle r="5" cy="{y}" fill="{t["accent"]}"><animate attributeName="cx" values="{xs[0]};{xs[-1]}" '
-             f'dur="6s" repeatCount="indefinite"/></circle>')
+    body += (f'<rect width="8" height="8" y="{y - 4}" fill="{t["accent"]}"><animate attributeName="x" values="{xs[0] - 4};{xs[-1] - 4}" '
+             f'dur="6s" repeatCount="indefinite"/></rect>')
     for i, (x, s) in enumerate(zip(xs, STEPS)):
-        last = i == len(STEPS) - 2
-        col = t["ok"] if last else t["line"]
-        body += f'<circle cx="{x}" cy="{y}" r="13" fill="{t["panel"]}" stroke="{col}" stroke-width="1.6"/>'
+        col = t["accent"] if i == len(STEPS) - 2 else t["line"]
+        body += f'<rect x="{x - 14}" y="{y - 14}" width="28" height="28" rx="2" fill="{t["panel"]}" stroke="{col}" stroke-width="1.6"/>'
         body += f'<text class="m" x="{x}" y="{y + 4}" font-size="10.5" text-anchor="middle" fill="{t["muted"]}">{i + 1:02d}</text>'
-        body += f'<text class="m" x="{x}" y="{y + 40}" font-size="12" text-anchor="middle" fill="{t["ink"]}">{escape(s)}</text>'
+        body += f'<text x="{x}" y="{y + 42}" font-size="13" font-weight="600" text-anchor="middle" fill="{t["ink"]}">{escape(s)}</text>'
     return svg(W, H, "Cómo trabajo: " + " → ".join(STEPS), body)
 
 
 def stack(t: dict) -> str:
     W = 840
     x0, right = 214, W - 20
-    y = 22
+    y = 24
     rows = ""
     for gi, (label, items) in enumerate(STACK):
-        rows += f'<text class="m" x="24" y="{y + 15}" font-size="10.5" letter-spacing="1.2" fill="{t["accent"]}">{escape(label)}</text>'
+        rows += f'<text x="26" y="{y + 15}" font-size="10.5" font-weight="600" letter-spacing="1.3" fill="{t["accent"]}">{escape(label)}</text>'
         x = x0
         for it in items:
-            w = mono_w(it, 11) + 18
+            w = mono_w(it, 11) + 16
             if x + w > right:
                 x, y = x0, y + 28
             s, w = chip(x, y, it, t, 11)
             rows += s
-            x += w + 7
+            x += w + 6
         y += 28
         if gi < len(STACK) - 1:
-            rows += f'<path d="M24 {y + 3}H{W - 24}" stroke="{t["line"]}" stroke-dasharray="2 5"/>'
+            rows += f'<path d="M26 {y + 3}H{W - 26}" stroke="{t["line"]}"/>'
             y += 14
-    H = y + 14
-    clip = f'<clipPath id="c"><rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="14"/></clipPath>'
+    H = y + 16
+    clip = f'<clipPath id="c"><path d="{cham(1, 1, W - 2, H - 2, 16)}"/></clipPath>'
     sheen = (f'<g clip-path="url(#c)"><rect class="sheen" x="0" y="0" width="120" height="{H}" fill="{t["accent"]}" '
              f'opacity=".07" transform="skewX(-18)"/></g>')
-    body = f'{clip}<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="14" fill="{t["bg"]}" stroke="{t["line"]}"/>{rows}{sheen}'
+    body = f'{clip}<path d="{cham(.5, .5, W - 1, H - 1, 16)}" fill="{t["bg"]}" stroke="{t["line"]}"/>{rows}{sheen}'
     label = "Stack: " + "; ".join(f"{g.title()}: {', '.join(i)}" for g, i in STACK)
     return svg(W, H, label, body)
 

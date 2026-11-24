@@ -18,7 +18,7 @@ import urllib.request
 from html import escape
 from pathlib import Path
 
-from build_assets import OUT, THEMES, mono_w, svg
+from build_assets import OUT, THEMES, cham, mono_w, svg
 
 LOGIN = os.environ.get("STATS_LOGIN", "Genkaix1000")
 README = OUT.parent / "README.md"
@@ -82,11 +82,11 @@ def card(user: dict, t: dict) -> str:
              ("PULL REQUESTS", fmt(cc["totalPullRequestContributions"])),
              ("RACHA ACTUAL", f"{current} d"), ("RACHA MÁS LARGA", f"{best} d"),
              ("REPOS", fmt(user["repositories"]["totalCount"]))]
-    body = f'<rect x=".5" y=".5" width="{W - 1}" height="H1" rx="14" fill="{t["bg"]}" stroke="{t["line"]}"/>'
+    body = f'<path d="CHAM" fill="{t["bg"]}" stroke="{t["line"]}"/>'
     xs = [28, 262, 372, 508, 624, 760]
     for x, (label, value) in zip(xs, stats):
         body += (f'<text x="{x}" y="50" font-size="26" font-weight="800" fill="{t["ink"]}">{value}</text>'
-                 f'<text class="m" x="{x}" y="70" font-size="9.5" letter-spacing=".8" fill="{t["muted"]}">{label}</text>')
+                 f'<text x="{x}" y="70" font-size="9.5" font-weight="600" letter-spacing="1" fill="{t["muted"]}">{label}</text>')
     # heatmap
     counts = sorted(d["contributionCount"] for d in days if d["contributionCount"])
     q = [counts[int(len(counts) * f)] for f in (0.25, 0.5, 0.75)] if counts else [1, 2, 3]
@@ -97,10 +97,10 @@ def card(user: dict, t: dict) -> str:
             n = d["contributionCount"]
             di = dt.date.fromisoformat(d["date"]).isoweekday() % 7
             if n == 0:
-                cells += f'<rect x="{x0 + wi * step}" y="{y0 + di * step}" width="11" height="11" rx="3" fill="{t["faint"]}"/>'
+                cells += f'<rect x="{x0 + wi * step}" y="{y0 + di * step}" width="11" height="11" rx="2" fill="{t["faint"]}"/>'
             else:
                 op = (0.35, 0.55, 0.78, 1)[sum(n > v for v in q)]
-                cells += f'<rect x="{x0 + wi * step}" y="{y0 + di * step}" width="11" height="11" rx="3" fill="{t["accent"]}" opacity="{op}"/>'
+                cells += f'<rect x="{x0 + wi * step}" y="{y0 + di * step}" width="11" height="11" rx="2" fill="{t["accent"]}" opacity="{op}"/>'
         body += f'<g class="wave" style="animation-delay:{-(len(weeks) - wi) * 0.09:.2f}s">{cells}</g>'
     # lenguajes
     sizes: dict[str, int] = {}
@@ -110,7 +110,7 @@ def card(user: dict, t: dict) -> str:
     top = sorted(sizes.items(), key=lambda kv: -kv[1])[:6]
     total = sum(v for _, v in top) or 1
     y = y0 + 7 * step + 26
-    body += f'<text class="m" x="28" y="{y}" font-size="9.5" letter-spacing=".8" fill="{t["muted"]}">LENGUAJES EN MIS REPOS</text>'
+    body += f'<text x="28" y="{y}" font-size="9.5" font-weight="600" letter-spacing="1" fill="{t["muted"]}">LENGUAJES EN MIS REPOS</text>'
     y += 12
     x, bar_w, segs, legend, lx = 28.0, W - 56, "", "", 28.0
     for i, (name, size) in enumerate(top):
@@ -125,7 +125,7 @@ def card(user: dict, t: dict) -> str:
     body += f'<g class="grow">{segs}</g>{legend}'
     H = y + 50
     label = "Actividad en GitHub: " + ", ".join(f"{l.lower()} {v}" for l, v in stats)
-    return svg(W, H, label, body.replace("H1", str(H - 1)))
+    return svg(W, H, label, body.replace("CHAM", cham(.5, .5, W - 1, H - 1, 16)))
 
 
 def main() -> None:
