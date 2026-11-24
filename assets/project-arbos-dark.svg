@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="204" viewBox="0 0 840 204" role="img" aria-label="ARBOS (arbos.ar · tienda online): E-commerce de perfumes con catálogo, combos y bolsa, más un dashboard privado para stock, insumos, pedidos, ventas y gastos. Stack: Next.js 16, Supabase, GSAP, Playwright."><title>ARBOS (arbos.ar · tienda online): E-commerce de perfumes con catálogo, combos y bolsa, más un dashboard privado para stock, insumos, pedidos, ventas y gastos. Stack: Next.js 16, Supabase, GSAP, Playwright.</title><style>text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}.m{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+@keyframes ping{0%{transform:scale(1);opacity:.7}80%,100%{transform:scale(2.8);opacity:0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes flow{to{stroke-dashoffset:-24}}
+@keyframes blink{50%{opacity:0}}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes bar{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+@keyframes nudge{0%,100%{transform:translate(0,0)}50%{transform:translate(3px,-3px)}}
+@keyframes scany{0%,100%{transform:translateY(0)}50%{transform:translateY(40px)}}
+@keyframes scanx{0%,100%{transform:translateX(0)}50%{transform:translateX(78px)}}
+@keyframes draw{0%{stroke-dashoffset:160}55%,100%{stroke-dashoffset:0}}
+@keyframes spray{0%{transform:translate(0,0);opacity:0}15%{opacity:1}100%{transform:translate(34px,-14px);opacity:0}}
+@keyframes rise{0%,15%{transform:scaleY(0)}45%,85%{transform:scaleY(1)}100%{transform:scaleY(0)}}
+@keyframes cell{0%,100%{opacity:.18}50%{opacity:1}}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-6px,5px)}}
+@keyframes word{0%{opacity:0;transform:translateY(10px)}2.5%,14%{opacity:1;transform:none}16.6%,100%{opacity:0;transform:translateY(-10px)}}
+@keyframes sheen{0%{transform:translateX(-140px)}60%,100%{transform:translateX(900px)}}
+.ping{transform-box:fill-box;transform-origin:center;animation:ping 2.4s ease-out infinite}
+.float{animation:float 4s ease-in-out infinite}
+.flow{stroke-dasharray:4 4;animation:flow 1.2s linear infinite}
+.blink{animation:blink 1.1s steps(1) infinite}
+.tw{animation:tw 3.6s ease-in-out infinite}
+.bar{transform-box:fill-box;transform-origin:bottom;animation:bar 1.3s ease-in-out infinite}
+.nudge{animation:nudge 2.2s ease-in-out infinite}
+.scany{animation:scany 3s ease-in-out infinite}
+.scanx{animation:scanx 3.2s ease-in-out infinite}
+.draw{stroke-dasharray:160;animation:draw 4s ease-out infinite}
+.spray{animation:spray 2.2s ease-out infinite}
+.rise{transform-box:fill-box;transform-origin:bottom;animation:rise 4s ease-in-out infinite}
+.cell{animation:cell 3s ease-in-out infinite}
+.drift{animation:drift 14s ease-in-out infinite}
+.word{opacity:0;animation:word 18s cubic-bezier(.16,1,.3,1) infinite}
+.sheen{animation:sheen 7s ease-in-out infinite}
+@keyframes wave{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes grow{0%{transform:scaleX(0)}25%,100%{transform:scaleX(1)}}
+.wave{animation:wave 5s ease-in-out infinite}
+.grow{transform-box:fill-box;transform-origin:left;animation:grow 8s cubic-bezier(.3,.7,.2,1) infinite}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.word{opacity:0}.w0{opacity:1}}
+</style><path d="M16.5 0.5H839.5V187.5L823.5 203.5H0.5V16.5Z" fill="#111514" stroke="#2b332f"/><text x="28" y="42" font-size="10.5" font-weight="600" letter-spacing="1.3" fill="#8fb39c">ARBOS.AR · TIENDA ONLINE</text><g transform="translate(606,42) scale(2.05)"><rect x="10" y="22" width="26" height="30" rx="5" fill="none" stroke="#8fb39c" stroke-width="1.6"/><rect x="18" y="12" width="10" height="10" rx="2" fill="#8fb39c"/><path d="M14 36h18" stroke="#2b332f" stroke-width="1.4"/><circle class="spray" style="animation-delay:0.00s" cx="36" cy="15" r="1.6" fill="#8fb39c"/><circle class="spray" style="animation-delay:-0.44s" cx="40" cy="19" r="2.4000000000000004" fill="#8fb39c"/><circle class="spray" style="animation-delay:-0.88s" cx="36" cy="23" r="1.6" fill="#8fb39c"/><circle class="spray" style="animation-delay:-1.32s" cx="40" cy="15" r="2.4000000000000004" fill="#8fb39c"/><circle class="spray" style="animation-delay:-1.76s" cx="36" cy="19" r="1.6" fill="#8fb39c"/></g><text x="28" y="88" font-size="32" font-weight="800" letter-spacing="-.6" fill="#e8ece8">ARBOS</text><text x="28" y="114" font-size="14" fill="#9ea49f">E-commerce de perfumes con catálogo, combos y bolsa, más un dashboard</text><text x="28" y="134" font-size="14" fill="#9ea49f">privado para stock, insumos, pedidos, ventas y gastos.</text><rect x="28.0" y="162" width="76.0" height="22" rx="2" fill="#1f2623" stroke="#2b332f"/><text class="m" x="36.0" y="177" font-size="10" fill="#9ea49f">Next.js 16</text><rect x="110.0" y="162" width="64.0" height="22" rx="2" fill="#1f2623" stroke="#2b332f"/><text class="m" x="118.0" y="177" font-size="10" fill="#9ea49f">Supabase</text><rect x="180.0" y="162" width="40.0" height="22" rx="2" fill="#1f2623" stroke="#2b332f"/><text class="m" x="188.0" y="177" font-size="10" fill="#9ea49f">GSAP</text><rect x="226.0" y="162" width="76.0" height="22" rx="2" fill="#1f2623" stroke="#2b332f"/><text class="m" x="234.0" y="177" font-size="10" fill="#9ea49f">Playwright</text></svg>
