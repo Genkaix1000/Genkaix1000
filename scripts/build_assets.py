@@ -88,14 +88,23 @@ CONTACTS = [
     dict(id="whatsapp", label="WHATSAPP", value="+54 9 11 7062-3866"),
 ]
 
+# (nombre, slug de simple-icons, color de marca). Los íconos los baja scripts/fetch_icons.py a assets/icons.json;
+# si uno no está, la baldosa muestra sus iniciales.
 STACK = [
-    ("FRONTEND", ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "GSAP", "Vite", "Flutter", "PWA"]),
-    ("BACKEND Y DATOS", ["Node.js", "Supabase", "PostgreSQL", "SQL", "Row Level Security", "Java · Spring", "Zod"]),
-    ("PAGOS E INTEGRACIONES", ["Mercado Pago Checkout Pro", "Webhooks", "SSE", "Realtime", "WhatsApp Cloud API"]),
-    ("TESTING E INFRA", ["Playwright", "Vitest", "GitHub Actions", "Docker", "Vercel", "Caddy", "Linux", "Turborepo"]),
-    ("SEGURIDAD Y REDES", ["Auditoría de APIs", "OWASP Top 10", "Auth / RBAC", "TCP/IP · DNS", "Redes Wi-Fi"]),
-    ("DISEÑO", ["Figma", "Penpot", "Photoshop", "Illustrator", "Identidad visual", "UI / UX", "Motion"]),
+    ("FRONTEND", [("Next.js", "nextdotjs", None), ("React", "react", "#61DAFB"), ("TypeScript", "typescript", "#3178C6"),
+                  ("Tailwind", "tailwindcss", "#06B6D4"), ("Vite", "vite", "#8B7BFF"), ("Flutter", "flutter", "#54C5F8")]),
+    ("BACKEND Y DATOS", [("Node.js", "nodedotjs", "#5FA04E"), ("Supabase", "supabase", "#3FCF8E"),
+                         ("PostgreSQL", "postgresql", "#5B8DEF"), ("Spring", "spring", "#6DB33F"), ("Zod", "zod", "#5B8AD6")]),
+    ("PAGOS E INTEGRACIONES", [("Mercado Pago", "mercadopago", "#00B1EA"), ("WhatsApp", "whatsapp", "#25D366")]),
+    ("TESTING Y CI", [("Playwright", "playwright", "#2EAD33"), ("Vitest", "vitest", "#8DB600"),
+                      ("GH Actions", "githubactions", "#2088FF")]),
+    ("INFRA", [("Docker", "docker", "#2496ED"), ("Vercel", "vercel", None), ("Caddy", "caddy", "#1F88C0"),
+               ("Linux", "linux", "#E5B400"), ("Turborepo", "turborepo", "#EF4444")]),
+    ("DISEÑO Y MOTION", [("Figma", "figma", "#F24E1E"), ("Penpot", "penpot", None), ("Photoshop", "adobephotoshop", "#31A8FF"),
+                         ("Illustrator", "adobeillustrator", "#FF9A00"), ("GSAP", "greensock", "#7FC400"),
+                         ("Motion", "framer", "#3D8BFF")]),
 ]
+ICONS_CACHE = OUT / "icons.json"
 
 STEPS = ["Brief", "Spec", "Código", "Tests", "Producción", "Soporte"]
 ROLES = ["Full Stack", "Frontend", "Diseño", "Data", "Pagos", "Seguridad"]
@@ -140,6 +149,10 @@ KEYFRAMES = """
 @keyframes grow{0%{transform:scaleX(0)}25%,100%{transform:scaleX(1)}}
 .wave{animation:wave 5s ease-in-out infinite}
 .grow{transform-box:fill-box;transform-origin:left;animation:grow 8s cubic-bezier(.3,.7,.2,1) infinite}
+@keyframes glow{0%,100%{opacity:0}50%{opacity:1}}
+@keyframes lit{0%{opacity:0}2%,7%{opacity:1}20%,100%{opacity:0}}
+.glow{opacity:0;animation:glow 7s ease-in-out infinite}
+.lit{opacity:0;animation:lit 10s ease-out infinite}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}.word{opacity:0}.w0{opacity:1}}
 """
 
@@ -298,23 +311,16 @@ def contact_button(cdata: dict, t: dict) -> str:
 
 
 def hero(t: dict) -> str:
-    W, H = 840, 330
+    W, H = 840, 384
     rnd = random.Random(11)
-    px, py, pw, ph = 590, 35, 208, 260  # retrato 4:5
+    px, py, pw, ph = 566, 47, 232, 290  # retrato 4:5
     body = (f'<defs><clipPath id="hc"><path d="{cham(1, 1, W - 2, H - 2, 22)}"/></clipPath>'
-            f'<clipPath id="pc"><path d="{cham(px, py, pw, ph, 24)}"/></clipPath>'
-            f'<clipPath id="wipe"><rect x="{px}" y="{py}" width="0" height="{ph}">'
-            f'<animate attributeName="width" dur="11s" repeatCount="indefinite" calcMode="spline" '
-            f'values="0;0;{pw};{pw};0;0" keyTimes="0;.3;.44;.72;.86;1" '
-            f'keySplines="0 0 1 1;.16 1 .3 1;0 0 1 1;.16 1 .3 1;0 0 1 1"/></rect></clipPath>'
-            f'<filter id="bw"><feColorMatrix type="saturate" values="0"/>'
-            f'<feComponentTransfer><feFuncR type="linear" slope="1.1" intercept="-.05"/><feFuncG type="linear" slope="1.1" intercept="-.05"/>'
-            f'<feFuncB type="linear" slope="1.1" intercept="-.05"/></feComponentTransfer></filter></defs>')
+            f'<clipPath id="pc"><path d="{cham(px, py, pw, ph, 26)}"/></clipPath></defs>')
     body += f'<path d="{cham(.5, .5, W - 1, H - 1, 22)}" fill="{t["bg"]}" stroke="{t["line"]}"/>'
     # constelación, por detrás del retrato
     pts = []
     while len(pts) < 20:
-        x, y = rnd.uniform(430, 824), rnd.uniform(22, 308)
+        x, y = rnd.uniform(410, 824), rnd.uniform(22, H - 22)
         inside = px - 6 < x < px + pw + 6 and py - 6 < y < py + ph + 6
         if not inside and all(math.hypot(x - qx, y - qy) > 40 for qx, qy in pts):
             pts.append((x, y))
@@ -329,82 +335,108 @@ def hero(t: dict) -> str:
         stars += (f'<circle class="tw" style="animation-delay:{-i * 0.41:.2f}s" cx="{x:.0f}" cy="{y:.0f}" '
                   f'r="{3.4 if big else 2.1}" fill="{t["accent"] if big else t["muted"]}"/>')
     body += f'<g clip-path="url(#hc)"><g class="drift">{lines}{stars}</g></g>'
-    # retrato: gris como en el sitio, con un barrido que revela el color
+    # retrato, con su color original
     if PORTRAIT.exists():
         b64 = base64.b64encode(PORTRAIT.read_bytes()).decode()
-        img = f'x="{px}" y="{py}" width="{pw}" height="{ph}" preserveAspectRatio="xMidYMid slice"'
-        body += (f'<g clip-path="url(#pc)"><image id="ph" {img} href="data:image/jpeg;base64,{b64}" filter="url(#bw)"/>'
-                 f'<g clip-path="url(#wipe)"><image {img} href="data:image/jpeg;base64,{b64}"/></g></g>')
-    body += f'<path d="{cham(px, py, pw, ph, 24)}" fill="none" stroke="{t["line"]}"/>'
+        body += (f'<g clip-path="url(#pc)"><image x="{px}" y="{py}" width="{pw}" height="{ph}" '
+                 f'preserveAspectRatio="xMidYMid slice" href="data:image/jpeg;base64,{b64}"/></g>')
+    body += f'<path d="{cham(px, py, pw, ph, 26)}" fill="none" stroke="{t["line"]}"/>'
     # marcas de corte de imprenta en las esquinas del retrato
-    marks = ""
     for i, (cx, cy, sx, sy) in enumerate([(px + pw, py, 1, -1), (px, py + ph, -1, 1)]):
-        marks += (f'<path class="tw" style="animation-delay:{-i * 1.8:.1f}s" d="M{cx + sx * 8} {cy}h{sx * 14}M{cx} {cy + sy * 8}v{sy * 14}" '
-                  f'stroke="{t["accent"]}" stroke-width="1.4"/>')
-    body += marks
-    # texto
-    name = text_path("Matías Asin", 60, 40, 108, t["ink"])
-    body += name or f'<text x="42" y="108" font-size="58" font-weight="800" letter-spacing="-1.6" fill="{t["ink"]}">Matías Asin</text>'
-    body += f'<text x="44" y="148" font-size="18" fill="{t["muted"]}">Software Engineer</text>'
+        body += (f'<path class="tw" style="animation-delay:{-i * 1.8:.1f}s" d="M{cx + sx * 8} {cy}h{sx * 14}M{cx} {cy + sy * 8}v{sy * 14}" '
+                 f'stroke="{t["accent"]}" stroke-width="1.4"/>')
+    # nombre en dos líneas, apellido en el color de acento
+    first = text_path("Matías", 80, 39, 110, t["ink"])
+    last = text_path("Asin", 80, 39, 186, t["accent"])
+    if first and last:
+        body += first + last
+    else:
+        body += (f'<text x="42" y="110" font-size="78" font-weight="800" letter-spacing="-2" fill="{t["ink"]}">Matías</text>'
+                 f'<text x="42" y="186" font-size="78" font-weight="800" letter-spacing="-2" fill="{t["accent"]}">Asin</text>')
+    body += f'<text x="44" y="228" font-size="17" fill="{t["muted"]}">Software Engineer</text>'
     n = len(ROLES)
     for i, r in enumerate(ROLES):
-        body += (f'<text class="word w{i}" style="animation-delay:{i * 18 / n:.1f}s" x="44" y="184" '
-                 f'font-size="25" font-weight="700" letter-spacing="-.3" fill="{t["accent"]}">{escape(r)}</text>')
-    body += f'<text x="44" y="238" font-size="17" fill="{t["ink"]}">Sistemas claros para problemas que no lo son.</text>'
-    body += f'<text x="44" y="262" font-size="13.5" fill="{t["muted"]}">Producto de punta a punta, con frontend y diseño cuidados al detalle.</text>'
-    body += f'<text x="44" y="296" font-size="11" font-weight="600" letter-spacing="1.3" fill="{t["muted"]}">BOLÍVAR, BUENOS AIRES · ARGENTINA</text>'
+        body += (f'<text class="word w{i}" style="animation-delay:{i * 18 / n:.1f}s" x="44" y="258" '
+                 f'font-size="23" font-weight="700" letter-spacing="-.3" fill="{t["ink"]}">{escape(r)}</text>')
+    body += f'<text x="44" y="304" font-size="17" fill="{t["ink"]}">Sistemas claros para problemas que no lo son.</text>'
+    body += f'<text x="44" y="327" font-size="13.5" fill="{t["muted"]}">Producto de punta a punta, con frontend y diseño cuidados al detalle.</text>'
+    body += f'<text x="44" y="356" font-size="11" font-weight="600" letter-spacing="1.3" fill="{t["muted"]}">BOLÍVAR, BUENOS AIRES · ARGENTINA</text>'
     return svg(W, H, "Matías Asin, Software Engineer: full stack, frontend y diseño. Bolívar, Buenos Aires, Argentina. "
                      "Sistemas claros para problemas que no lo son.", body)
 
 
 def process(t: dict) -> str:
+    """Un punto recorre los pasos: llega a cada uno, lo enciende y sigue al siguiente."""
     W, H = 840, 112
-    body = f'<path d="{cham(.5, .5, W - 1, H - 1, 16)}" fill="{t["bg"]}" stroke="{t["line"]}"/>'
+    T, stay, go = 10.0, 0.5, 1.0
     xs = [70 + i * 140 for i in range(len(STEPS))]
     y = 46
-    body += f'<path class="flow" d="M{xs[0]} {y}H{xs[-1]}" stroke="{t["muted"]}" stroke-width="1.6" fill="none"/>'
-    body += (f'<rect width="8" height="8" y="{y - 4}" fill="{t["accent"]}"><animate attributeName="x" values="{xs[0] - 4};{xs[-1] - 4}" '
-             f'dur="6s" repeatCount="indefinite"/></rect>')
+    frames = ""
+    for i, x in enumerate(xs):
+        a = i * (stay + go)
+        dx = x - xs[0]
+        frames += (f'{a / T * 100:.1f}%{{transform:translateX({dx}px);opacity:1}}'
+                   f'{(a + stay) / T * 100:.1f}%{{transform:translateX({dx}px);opacity:1;animation-timing-function:cubic-bezier(.5,0,.2,1)}}')
+    end = (len(xs) - 1) * (stay + go) + stay
+    last = xs[-1] - xs[0]
+    frames += (f'{(end + .5) / T * 100:.1f}%{{transform:translateX({last}px);opacity:0}}'
+               f'{(T - .5) / T * 100:.1f}%{{transform:translateX(0);opacity:0}}100%{{transform:translateX(0);opacity:1}}')
+    css = f'<style>@keyframes walk{{{frames}}}.walk{{animation:walk {T}s linear infinite}}@media (prefers-reduced-motion:reduce){{.walk{{animation:none}}}}</style>'
+    body = css + f'<path d="{cham(.5, .5, W - 1, H - 1, 16)}" fill="{t["bg"]}" stroke="{t["line"]}"/>'
+    body += f'<path d="M{xs[0]} {y}H{xs[-1]}" stroke="{t["line"]}" stroke-width="1.6" fill="none"/>'
+    body += f'<circle class="walk" cx="{xs[0]}" cy="{y}" r="4.5" fill="{t["accent"]}"/>'  # va por la línea y entra en cada caja
     for i, (x, s) in enumerate(zip(xs, STEPS)):
-        col = t["accent"] if i == len(STEPS) - 2 else t["line"]
-        body += f'<rect x="{x - 14}" y="{y - 14}" width="28" height="28" rx="2" fill="{t["panel"]}" stroke="{col}" stroke-width="1.6"/>'
-        body += f'<text class="m" x="{x}" y="{y + 4}" font-size="10.5" text-anchor="middle" fill="{t["muted"]}">{i + 1:02d}</text>'
+        box = f'x="{x - 14}" y="{y - 14}" width="28" height="28" rx="2"'
+        num = f'class="m" x="{x}" y="{y + 4}" font-size="10.5" text-anchor="middle"'
+        body += f'<rect {box} fill="{t["panel"]}" stroke="{t["line"]}" stroke-width="1.6"/><text {num} fill="{t["muted"]}">{i + 1:02d}</text>'
+        body += (f'<g class="lit" style="animation-delay:{i * (stay + go):.1f}s"><rect {box} fill="{t["accent"]}" stroke="{t["accent"]}" stroke-width="1.6"/>'
+                 f'<text {num} font-weight="700" fill="{t["bg"]}">{i + 1:02d}</text></g>')
         body += f'<text x="{x}" y="{y + 42}" font-size="13" font-weight="600" text-anchor="middle" fill="{t["ink"]}">{escape(s)}</text>'
     return svg(W, H, "Cómo trabajo: " + " → ".join(STEPS), body)
 
 
+def load_icons() -> dict:
+    import json
+    try:
+        return json.loads(ICONS_CACHE.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
 def stack(t: dict) -> str:
-    W = 840
-    x0, right = 214, W - 20
-    y = 24
-    rows = ""
-    for gi, (label, items) in enumerate(STACK):
-        rows += f'<text x="26" y="{y + 15}" font-size="10.5" font-weight="600" letter-spacing="1.3" fill="{t["accent"]}">{escape(label)}</text>'
-        x = x0
-        for it in items:
-            w = mono_w(it, 11) + 16
-            if x + w > right:
-                x, y = x0, y + 28
-            s, w = chip(x, y, it, t, 11)
-            rows += s
-            x += w + 6
-        y += 28
-        if gi < len(STACK) - 1:
-            rows += f'<path d="M26 {y + 3}H{W - 26}" stroke="{t["line"]}"/>'
-            y += 14
-    H = y + 16
-    clip = f'<clipPath id="c"><path d="{cham(1, 1, W - 2, H - 2, 16)}"/></clipPath>'
-    sheen = (f'<g clip-path="url(#c)"><rect class="sheen" x="0" y="0" width="120" height="{H}" fill="{t["accent"]}" '
-             f'opacity=".07" transform="skewX(-18)"/></g>')
-    body = f'{clip}<path d="{cham(.5, .5, W - 1, H - 1, 16)}" fill="{t["bg"]}" stroke="{t["line"]}"/>{rows}{sheen}'
-    label = "Stack: " + "; ".join(f"{g.title()}: {', '.join(i)}" for g, i in STACK)
+    """Baldosas con ícono y nombre, en secciones a dos columnas."""
+    W, pitch, tile = 840, 66, 44
+    icons = load_icons()
+    cols = [26, 434]
+    body, y, n = "", 30, 0
+    for r in range(0, len(STACK), 2):
+        for c, (label, items) in enumerate(STACK[r:r + 2]):
+            x0 = cols[c]
+            body += f'<text x="{x0}" y="{y + 4}" font-size="10.5" font-weight="600" letter-spacing="1.3" fill="{t["accent"]}">{escape(label)}</text>'
+            for i, (name, slug, color) in enumerate(items):
+                x, ty = x0 + i * pitch, y + 18
+                col = color or t["ink"]
+                body += f'<rect x="{x}" y="{ty}" width="{tile}" height="{tile}" rx="10" fill="{t["panel"]}" stroke="{t["line"]}"/>'
+                body += (f'<rect class="glow" style="animation-delay:{n * 0.26:.2f}s" x="{x}" y="{ty}" width="{tile}" height="{tile}" rx="10" '
+                         f'fill="none" stroke="{t["accent"]}" stroke-width="1.4"/>')
+                if icons.get(slug):
+                    body += f'<path transform="translate({x + 10},{ty + 10})" d="{icons[slug]}" fill="{col}"/>'
+                else:
+                    ini = "".join(w[0] for w in name.replace(".", " ").split())[:2] if " " in name or "." in name else name[:2]
+                    body += f'<text x="{x + tile / 2}" y="{ty + 28}" font-size="15" font-weight="700" text-anchor="middle" fill="{col}">{escape(ini)}</text>'
+                body += f'<text x="{x + tile / 2}" y="{ty + tile + 16}" font-size="{9.5 if len(name) > 10 else 10.5}" text-anchor="middle" fill="{t["muted"]}">{escape(name)}</text>'
+                n += 1
+        y += 18 + tile + 16 + 30
+    H = y - 6
+    body = f'<path d="{cham(.5, .5, W - 1, H - 1, 16)}" fill="{t["bg"]}" stroke="{t["line"]}"/>' + body
+    label = "Stack: " + "; ".join(f"{g.capitalize()}: {', '.join(i[0] for i in items)}" for g, items in STACK)
     return svg(W, H, label, body)
 
 
 def main() -> None:
     OUT.mkdir(exist_ok=True)
     for name, t in THEMES.items():
-        files = {"hero": hero(t), "process": process(t)}  # el stack va con badges en el README
+        files = {"hero": hero(t), "process": process(t), "stack": stack(t)}
         files.update({f"project-{p['id']}": project_card(p, t) for p in PROJECTS})
         files.update({f"contact-{c['id']}": contact_button(c, t) for c in CONTACTS})
         for stem, content in files.items():

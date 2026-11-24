@@ -1,4 +1,4 @@
-name: Actualizar actividad del perfil
+name: Actualizar perfil (íconos y actividad)
 
 on:
   schedule:
@@ -16,6 +16,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Bajar íconos del stack y regenerar las piezas
+        run: |
+          python3 scripts/fetch_icons.py
+          python3 scripts/build_assets.py
       - name: Generar SVG de actividad
         env:
           GITHUB_TOKEN: ${{ secrets.STATS_TOKEN || github.token }}

@@ -54,71 +54,9 @@ La mayor parte de estos productos los construyo desde [Bridge Bolívar](https://
 
 ## Stack
 
-<table>
-<tr>
-<td valign="top" width="33%">
-<b>Frontend</b><br/><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Next.js-1f2623?style=flat-square&amp;logo=nextdotjs&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Next.js-ebeae3?style=flat-square&amp;logo=nextdotjs&amp;logoColor=4f6f5c" height="26" alt="Next.js"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/React-1f2623?style=flat-square&amp;logo=react&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/React-ebeae3?style=flat-square&amp;logo=react&amp;logoColor=4f6f5c" height="26" alt="React"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/TypeScript-1f2623?style=flat-square&amp;logo=typescript&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/TypeScript-ebeae3?style=flat-square&amp;logo=typescript&amp;logoColor=4f6f5c" height="26" alt="TypeScript"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Tailwind_CSS-1f2623?style=flat-square&amp;logo=tailwindcss&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Tailwind_CSS-ebeae3?style=flat-square&amp;logo=tailwindcss&amp;logoColor=4f6f5c" height="26" alt="Tailwind CSS"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Motion-1f2623?style=flat-square&amp;logo=framer&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Motion-ebeae3?style=flat-square&amp;logo=framer&amp;logoColor=4f6f5c" height="26" alt="Motion"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/GSAP-1f2623?style=flat-square&amp;logo=greensock&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/GSAP-ebeae3?style=flat-square&amp;logo=greensock&amp;logoColor=4f6f5c" height="26" alt="GSAP"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Vite-1f2623?style=flat-square&amp;logo=vite&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Vite-ebeae3?style=flat-square&amp;logo=vite&amp;logoColor=4f6f5c" height="26" alt="Vite"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Flutter-1f2623?style=flat-square&amp;logo=flutter&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Flutter-ebeae3?style=flat-square&amp;logo=flutter&amp;logoColor=4f6f5c" height="26" alt="Flutter"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/PWA-1f2623?style=flat-square&amp;logo=pwa&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/PWA-ebeae3?style=flat-square&amp;logo=pwa&amp;logoColor=4f6f5c" height="26" alt="PWA"/></picture>
-</td>
-<td valign="top" width="33%">
-<b>Backend y datos</b><br/><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Node.js-1f2623?style=flat-square&amp;logo=nodedotjs&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Node.js-ebeae3?style=flat-square&amp;logo=nodedotjs&amp;logoColor=4f6f5c" height="26" alt="Node.js"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Supabase-1f2623?style=flat-square&amp;logo=supabase&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Supabase-ebeae3?style=flat-square&amp;logo=supabase&amp;logoColor=4f6f5c" height="26" alt="Supabase"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/PostgreSQL-1f2623?style=flat-square&amp;logo=postgresql&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/PostgreSQL-ebeae3?style=flat-square&amp;logo=postgresql&amp;logoColor=4f6f5c" height="26" alt="PostgreSQL"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/SQL-1f2623?style=flat-square&amp;logo=postgresql&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/SQL-ebeae3?style=flat-square&amp;logo=postgresql&amp;logoColor=4f6f5c" height="26" alt="SQL"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Row_Level_Security-1f2623?style=flat-square&amp;logo=supabase&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Row_Level_Security-ebeae3?style=flat-square&amp;logo=supabase&amp;logoColor=4f6f5c" height="26" alt="Row Level Security"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Java_%C2%B7_Spring-1f2623?style=flat-square&amp;logo=spring&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Java_%C2%B7_Spring-ebeae3?style=flat-square&amp;logo=spring&amp;logoColor=4f6f5c" height="26" alt="Java · Spring"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Zod-1f2623?style=flat-square&amp;logo=zod&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Zod-ebeae3?style=flat-square&amp;logo=zod&amp;logoColor=4f6f5c" height="26" alt="Zod"/></picture>
-</td>
-<td valign="top" width="33%">
-<b>Pagos e integraciones</b><br/><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Mercado_Pago_Checkout_Pro-1f2623?style=flat-square&amp;logo=mercadopago&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Mercado_Pago_Checkout_Pro-ebeae3?style=flat-square&amp;logo=mercadopago&amp;logoColor=4f6f5c" height="26" alt="Mercado Pago Checkout Pro"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Webhooks-1f2623?style=flat-square&amp;logo=webhooks&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Webhooks-ebeae3?style=flat-square&amp;logo=webhooks&amp;logoColor=4f6f5c" height="26" alt="Webhooks"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/SSE-1f2623?style=flat-square"/><img src="https://img.shields.io/badge/SSE-ebeae3?style=flat-square" height="26" alt="SSE"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Realtime-1f2623?style=flat-square&amp;logo=supabase&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Realtime-ebeae3?style=flat-square&amp;logo=supabase&amp;logoColor=4f6f5c" height="26" alt="Realtime"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/WhatsApp_Cloud_API-1f2623?style=flat-square&amp;logo=whatsapp&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/WhatsApp_Cloud_API-ebeae3?style=flat-square&amp;logo=whatsapp&amp;logoColor=4f6f5c" height="26" alt="WhatsApp Cloud API"/></picture>
-</td>
-</tr>
-<tr>
-<td valign="top" width="33%">
-<b>Testing e infra</b><br/><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Playwright-1f2623?style=flat-square&amp;logo=playwright&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Playwright-ebeae3?style=flat-square&amp;logo=playwright&amp;logoColor=4f6f5c" height="26" alt="Playwright"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Vitest-1f2623?style=flat-square&amp;logo=vitest&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Vitest-ebeae3?style=flat-square&amp;logo=vitest&amp;logoColor=4f6f5c" height="26" alt="Vitest"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/GitHub_Actions-1f2623?style=flat-square&amp;logo=githubactions&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/GitHub_Actions-ebeae3?style=flat-square&amp;logo=githubactions&amp;logoColor=4f6f5c" height="26" alt="GitHub Actions"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Docker-1f2623?style=flat-square&amp;logo=docker&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Docker-ebeae3?style=flat-square&amp;logo=docker&amp;logoColor=4f6f5c" height="26" alt="Docker"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Vercel-1f2623?style=flat-square&amp;logo=vercel&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Vercel-ebeae3?style=flat-square&amp;logo=vercel&amp;logoColor=4f6f5c" height="26" alt="Vercel"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Caddy-1f2623?style=flat-square&amp;logo=caddy&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Caddy-ebeae3?style=flat-square&amp;logo=caddy&amp;logoColor=4f6f5c" height="26" alt="Caddy"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Linux-1f2623?style=flat-square&amp;logo=linux&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Linux-ebeae3?style=flat-square&amp;logo=linux&amp;logoColor=4f6f5c" height="26" alt="Linux"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Turborepo-1f2623?style=flat-square&amp;logo=turborepo&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Turborepo-ebeae3?style=flat-square&amp;logo=turborepo&amp;logoColor=4f6f5c" height="26" alt="Turborepo"/></picture>
-</td>
-<td valign="top" width="33%">
-<b>Seguridad y redes</b><br/><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Auditor%C3%ADa_de_APIs-1f2623?style=flat-square"/><img src="https://img.shields.io/badge/Auditor%C3%ADa_de_APIs-ebeae3?style=flat-square" height="26" alt="Auditoría de APIs"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/OWASP_Top_10-1f2623?style=flat-square&amp;logo=owasp&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/OWASP_Top_10-ebeae3?style=flat-square&amp;logo=owasp&amp;logoColor=4f6f5c" height="26" alt="OWASP Top 10"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Auth_%2F_RBAC-1f2623?style=flat-square"/><img src="https://img.shields.io/badge/Auth_%2F_RBAC-ebeae3?style=flat-square" height="26" alt="Auth / RBAC"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/TCP%2FIP_%C2%B7_DNS-1f2623?style=flat-square"/><img src="https://img.shields.io/badge/TCP%2FIP_%C2%B7_DNS-ebeae3?style=flat-square" height="26" alt="TCP/IP · DNS"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Redes_Wi--Fi-1f2623?style=flat-square"/><img src="https://img.shields.io/badge/Redes_Wi--Fi-ebeae3?style=flat-square" height="26" alt="Redes Wi-Fi"/></picture>
-</td>
-<td valign="top" width="33%">
-<b>Diseño</b><br/><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Figma-1f2623?style=flat-square&amp;logo=figma&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Figma-ebeae3?style=flat-square&amp;logo=figma&amp;logoColor=4f6f5c" height="26" alt="Figma"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Penpot-1f2623?style=flat-square&amp;logo=penpot&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Penpot-ebeae3?style=flat-square&amp;logo=penpot&amp;logoColor=4f6f5c" height="26" alt="Penpot"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Photoshop-1f2623?style=flat-square&amp;logo=adobephotoshop&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Photoshop-ebeae3?style=flat-square&amp;logo=adobephotoshop&amp;logoColor=4f6f5c" height="26" alt="Photoshop"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Illustrator-1f2623?style=flat-square&amp;logo=adobeillustrator&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Illustrator-ebeae3?style=flat-square&amp;logo=adobeillustrator&amp;logoColor=4f6f5c" height="26" alt="Illustrator"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Identidad_visual-1f2623?style=flat-square"/><img src="https://img.shields.io/badge/Identidad_visual-ebeae3?style=flat-square" height="26" alt="Identidad visual"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/UI_%2F_UX-1f2623?style=flat-square"/><img src="https://img.shields.io/badge/UI_%2F_UX-ebeae3?style=flat-square" height="26" alt="UI / UX"/></picture><br/>
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Motion-1f2623?style=flat-square&amp;logo=framer&amp;logoColor=8fb39c"/><img src="https://img.shields.io/badge/Motion-ebeae3?style=flat-square&amp;logo=framer&amp;logoColor=4f6f5c" height="26" alt="Motion"/></picture>
-</td>
-</tr>
-</table>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg"/><source media="(prefers-color-scheme: light)" srcset="assets/stack-light.svg"/><img src="assets/stack-light.svg" width="100%" alt="Stack: Next.js, React, TypeScript, Tailwind, Vite, Flutter, Node.js, Supabase, PostgreSQL, Spring, Zod, Mercado Pago, WhatsApp, Playwright, Vitest, GitHub Actions, Docker, Vercel, Caddy, Linux, Turborepo, Figma, Penpot, Photoshop, Illustrator, GSAP y Motion"/></picture>
+
+Además: Row Level Security, webhooks y SSE, auditoría de APIs (OWASP Top 10), Auth / RBAC, redes (TCP/IP, DNS, Wi-Fi), identidad visual y UI / UX.
 
 <!--STATS:START-->
 ## Actividad
@@ -157,12 +95,12 @@ Soy **Matías Asin**, Software Engineer full stack de Bolívar, Buenos Aires, Ar
 
 **Stack**
 
-- **Frontend**: Next.js, React, TypeScript, Tailwind CSS, Motion, GSAP, Vite, Flutter, PWA
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS, Vite, Flutter, PWA
 - **Backend y datos**: Node.js, Supabase, PostgreSQL, SQL, Row Level Security, Java · Spring, Zod
-- **Pagos e integraciones**: Mercado Pago Checkout Pro, Webhooks, SSE, Realtime, WhatsApp Cloud API
+- **Pagos e integraciones**: Mercado Pago Checkout Pro, webhooks, SSE, WhatsApp Cloud API
 - **Testing e infra**: Playwright, Vitest, GitHub Actions, Docker, Vercel, Caddy, Linux, Turborepo
-- **Seguridad y redes**: Auditoría de APIs, OWASP Top 10, Auth / RBAC, TCP/IP · DNS, Redes Wi-Fi
-- **Diseño**: Figma, Penpot, Photoshop, Illustrator, Identidad visual, UI / UX, Motion
+- **Seguridad y redes**: auditoría de APIs, OWASP Top 10, Auth / RBAC, TCP/IP · DNS, redes Wi-Fi
+- **Diseño y motion**: Figma, Penpot, Photoshop, Illustrator, identidad visual, UI / UX, GSAP, Motion
 
 **Contacto**
 
