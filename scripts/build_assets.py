@@ -404,7 +404,7 @@ def stack(t: dict) -> str:
 def main() -> None:
     OUT.mkdir(exist_ok=True)
     for name, t in THEMES.items():
-        files = {"hero": hero(t), "process": process(t), "stack": stack(t)}
+        files = {"hero": hero(t), "process": process(t)}  # el stack va con badges en el README
         files.update({f"project-{p['id']}": project_card(p, t) for p in PROJECTS})
         files.update({f"contact-{c['id']}": contact_button(c, t) for c in CONTACTS})
         for stem, content in files.items():
