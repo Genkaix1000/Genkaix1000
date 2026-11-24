@@ -11,6 +11,8 @@
 
 Full stack con criterio de datos, seguridad y operación real, y con una mirada muy exigente sobre el frontend: vengo del diseño gráfico, así que jerarquía, tipografía, espaciado y movimiento son parte del trabajo y no un detalle del final. Arranco desde el problema de negocio y llevo el producto hasta que corre en el piso: interfaz, código, pagos, base de datos, deploy, capacitación al staff y soporte en vivo.
 
+La mayor parte de estos productos los construyo desde [Bridge Bolívar](https://github.com/Bridge-Bolivar), mi organización: un equipo chico de desarrollo con base en Bolívar.
+
 ## En producción
 
 <p>
@@ -38,7 +40,7 @@ Full stack con criterio de datos, seguridad y operación real, y con una mirada 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/project-bridge-panel-dark.svg"/><source media="(prefers-color-scheme: light)" srcset="assets/project-bridge-panel-light.svg"/><img src="assets/project-bridge-panel-light.svg" width="49%" alt="Bridge Panel: Calendario interno del equipo: reuniones, deadlines y timeline por proyecto. PWA pensada para usarse con una mano desde el celular."/></picture>
 </p>
 
-<sub>La mayoría de estos repos son privados porque son productos en operación o de clientes. Si querés ver código o una demo, escribime.</sub>
+<sub>La mayoría de estos repos son privados y viven en <a href="https://github.com/Bridge-Bolivar">Bridge Bolívar</a>, porque son productos en operación o de clientes. Si querés ver código o una demo, escribime.</sub>
 
 ## Cómo trabajo
 
@@ -73,7 +75,7 @@ Full stack con criterio de datos, seguridad y operación real, y con una mirada 
 <summary>Todo en texto plano</summary>
 <br/>
 
-Soy **Matías Asin**, Software Engineer full stack de Bolívar, Buenos Aires, Argentina. Trabajo todo el producto, del diseño de la interfaz a la base de datos, con foco fuerte en frontend y diseño gráfico. Remoto, presencial en CABA o con relocación.
+Soy **Matías Asin**, Software Engineer full stack de Bolívar, Buenos Aires, Argentina. Trabajo todo el producto, del diseño de la interfaz a la base de datos, con foco fuerte en frontend y diseño gráfico. Remoto, presencial en CABA o con relocación. Trabajo desde [Bridge Bolívar](https://github.com/Bridge-Bolivar), mi organización.
 
 **Proyectos**
 
@@ -108,7 +110,7 @@ Soy **Matías Asin**, Software Engineer full stack de Bolívar, Buenos Aires, Ar
 <summary>English</summary>
 <br/>
 
-I'm a full-stack software engineer from Buenos Aires, Argentina, with a graphic design background and a sharp eye for frontend, plus experience in data, security and live operations. I start from the business problem and take the product all the way to the floor: code, payments, database, deployment, staff training and on-site support.
+I'm a full-stack software engineer from Buenos Aires, Argentina, with a graphic design background and a sharp eye for frontend, plus experience in data, security and live operations. Most of these products are built at [Bridge Bolívar](https://github.com/Bridge-Bolivar), my organization. I start from the business problem and take the product all the way to the floor: code, payments, database, deployment, staff training and on-site support.
 
 - **miBoliche**: POS and QR ordering for nightclubs, live at Bosko since July 2026 (~1,000 orders a night at peak events).
 - **ARBOS**: perfume e-commerce plus a private management dashboard, live at [arbos.ar](https://www.arbos.ar).
@@ -119,5 +121,3 @@ I'm a full-stack software engineer from Buenos Aires, Argentina, with a graphic 
 Mostly Next.js, React, TypeScript, Supabase/PostgreSQL and Mercado Pago. Certified Mercado Pago Checkout Pro developer. Final stage of a Data Science degree.
 
 </details>
-
-<p align="center"><sub>Las piezas son SVG animados generados con <a href="scripts/build_assets.py">scripts/build_assets.py</a>.</sub></p>
